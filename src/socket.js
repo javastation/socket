@@ -1,4 +1,3 @@
-import { ref } from 'vue'
 const pingMessage = () => {
   return { ping: (+new Date()).toString() }
 }
@@ -17,10 +16,12 @@ export function useWebSocket(
     interval = 30 * 1000,
   } = options
 
-  const data = ref(null)
-  const status = ref('CLOSED')
-  const wsRef = ref()
-  const urlRef = ref(url)
+  let data = null
+  const status = {
+    value:'CLOSED'
+  }
+  const wsRef = {value:null}
+  const urlRef = {value:url}
   const messages = new Map()
   let explicitlyClosed = false, timer = null
 
@@ -92,7 +93,7 @@ export function useWebSocket(
           captureError?.(res, { url: res.channel })
         }
       }
-      data.value = res
+      data = res
       onMessage?.(ws, e)
     }
     if (timer) clearInterval(timer)
