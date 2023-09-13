@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 const pingMessage = () => {
   return { ping: (+new Date()).toString() }
 }
