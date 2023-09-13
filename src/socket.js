@@ -56,12 +56,12 @@ export function useWebSocket(
 
     ws.onopen = () => {
       status.value = 'OPEN'
-      onConnected?.(ws)
       if (messages.size > 0) {
         messages.forEach((value) => {
           send(value.data)
         })
       }
+      onConnected?.(ws)
     }
 
     ws.onclose = (ev) => {
